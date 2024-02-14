@@ -4,12 +4,12 @@
 
 ## How to use?
 
-- Faça o backup do seu projeto (backup ontem, hoje, amanhã e sempre);
-- Rode o arquivo (PHP ou PY, fica a seu critério) a partir da pasta que deseja executar a verificação (o processo ocorre recursivamente em todos os JS);
-- Aguarde o processo finalizar;
-- Escanei novamente com a ferramenta de sua escolha!
+- Back up your project (backup yesterday, today, tomorrow and always);
+- Run the file (PHP or PY, it's up to you) from the folder you want to run the check (the process occurs recursively in all JS);
+- Wait for the process to finish;
+- Scan again with the tool of your choice!
 
-## Recursos
+## Resources
 - Version in PHP and Python;
 - Scans JS files only, it is an add-on to clean JS files in bulk;
 
