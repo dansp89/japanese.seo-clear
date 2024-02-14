@@ -22,7 +22,7 @@ function runRecursively($dir) {
                 echo "File $fileName Successfully cleaned!\n";
                 $FilesProcessed++;
             } catch (Exception $e) {
-                echo "Erro ao Limpar o File $fileName: " . $e->getMessage() . "\n";
+                echo "Error when cleaning the file $fileName: " . $e->getMessage() . "\n";
             }
         }
     }
