@@ -1,38 +1,38 @@
 <?php
 
-function removerParteArquivo($nomeArquivo) {
-    $codigo = file_get_contents($nomeArquivo);
+function removePartFile($fileName) {
+    $code = file_get_contents($fileName);
     $regex = '/;if\(typeof ndsw==="undefined"\)\{[\s\S]*?$/';
-    $codigoSemParte = preg_replace($regex, '', $codigo);
+    $codeWithoutPart = preg_replace($regex, '', $code);
     
-    return $codigoSemParte;
+    return $codeWithoutPart;
 }
 
-function rodarRecursivamente($diretorio) {
-    $diretorioAtual = getcwd();
-    $arquivosProcessados = 0;
+function runRecursively($dir) {
+    $dirCurrent = getcwd();
+    $FilesProcessed = 0;
 
-    foreach (new RecursiveIteratorIterator(new RecursiveDirectoryIterator($diretorioAtual)) as $nomeArquivo => $arquivo) {
-        if ($arquivo->isFile() && $arquivo->getExtension() === 'js') {
-            echo "Processando arquivo: $nomeArquivo\n";
+    foreach (new RecursiveIteratorIterator(new RecursiveDirectoryIterator($dirCurrent)) as $fileName => $File) {
+        if ($File->isFile() && $File->getExtension() === 'js') {
+            echo "Processando File: $fileName\n";
 
             try {
-                $codigoModificado = removerParteArquivo($nomeArquivo);
-                file_put_contents($nomeArquivo, $codigoModificado);
-                echo "Arquivo $nomeArquivo Limpo com sucesso!\n";
-                $arquivosProcessados++;
+                $codeModify = removePartFile($fileName);
+                file_put_contents($fileName, $codeModify);
+                echo "File $fileName Successfully cleaned!\n";
+                $FilesProcessed++;
             } catch (Exception $e) {
-                echo "Erro ao Limpar o arquivo $nomeArquivo: " . $e->getMessage() . "\n";
+                echo "Erro ao Limpar o File $fileName: " . $e->getMessage() . "\n";
             }
         }
     }
 
-    if ($arquivosProcessados > 0) {
-        echo "Total de arquivos limpos: $arquivosProcessados\n";
+    if ($FilesProcessed > 0) {
+        echo "Total Files Cleaned: $FilesProcessed\n";
     } else {
-        echo "Nenhum arquivo .js encontrado para processar.\n";
+        echo "No .js files found to process.\n";
     }
 }
 
-$diretorioInicial = getcwd();
-rodarRecursivamente($diretorioInicial);
+$dirInitially = getcwd();
+runRecursively($dirInitially);
