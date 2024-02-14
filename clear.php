@@ -8,7 +8,7 @@ function removePartFile($fileName) {
     return $codeWithoutPart;
 }
 
-function runRecursively($dir) {
+function runRecursively() {
     $dirCurrent = getcwd();
     $FilesProcessed = 0;
 
@@ -33,6 +33,4 @@ function runRecursively($dir) {
         echo "No .js files found to process.\n";
     }
 }
-
-$dirInitially = getcwd();
-runRecursively($dirInitially);
+runRecursively();
