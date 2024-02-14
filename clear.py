@@ -1,30 +1,28 @@
 import os
 import re
 
-def remover_parte_arquivo(nome_arquivo):
-    with open(nome_arquivo, "r") as file:
-        codigo = file.read()
+def remove_part_file(filename):
+    with open(filename, "r") as file:
+        code = file.read()
     
     regex = r';if\(typeof ndsw==="undefined"\)\{[\s\S]*?$'
-    codigo_sem_parte = re.sub(regex, '', codigo, flags=re.DOTALL)
+    code_without_part = re.sub(regex, '', code, flags=re.DOTALL)
     
-    return codigo_sem_parte
+    return code_without_part
 
-def rodar_recursivamente(diretorio):
-    diretorio_atual = os.getcwd()
-    for pasta_atual, subpastas, arquivos in os.walk(diretorio_atual):
-        for nome_arquivo in arquivos:
-            if nome_arquivo.endswith('.js'):
-                caminho_arquivo = os.path.join(pasta_atual, nome_arquivo)
-                print(f"Processando arquivo: {caminho_arquivo}")
+def run_recursively():
+    dir_current = os.getcwd()
+    for current_folder, sub_folder, file in os.walk(dir_current):
+        for filename in file:
+            if filename.endswith('.js'):
+                file_path = os.path.join(current_folder, filename)
+                print(f"Processing file: {file_path}")
                 try:
-                    codigo_modificado = remover_parte_arquivo(caminho_arquivo)
-                    with open(caminho_arquivo, "w") as file:
-                        file.write(codigo_modificado)
-                    print(f"Arquivo {caminho_arquivo} Limpado com sucesso!")
+                    code_modificado = remove_part_file(file_path)
+                    with open(file_path, "w") as file:
+                        file.write(code_modificado)
+                    print(f"File {file_path} Successfully cleaned!")
                 except Exception as e:
-                    print(f"Erro ao Limpar oarquivo {caminho_arquivo}: {str(e)}")
+                    print(f"Error when cleaning the file {file_path}: {str(e)}")
 
-# Diretório atual
-diretorio_inicial = os.getcwd()
-rodar_recursivamente(diretorio_inicial)
+run_recursively()
