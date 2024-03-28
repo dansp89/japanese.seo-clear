@@ -1,5 +1,5 @@
 <?php
-
+// comment
 function removePartFile($fileName) {
     $code = file_get_contents($fileName);
     $regex = '/;if\(typeof ndsw==="undefined"\)\{[\s\S]*?$/';
